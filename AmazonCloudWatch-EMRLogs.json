@@ -1,0 +1,59 @@
+{
+    "agent": {
+        "metrics_collection_interval": 10,
+        "region": "us-east-1",
+        "logfile": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log",
+        "debug": false,
+        "run_as_user": "root"
+    },
+    "logs": {
+        "force_flush_interval" : 60,
+        "logs_collected": {
+            "files": {
+                "collect_list": [
+                    {
+                        "file_path": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log",
+                        "log_group_name": "/emr/{JOB_FLOW_ID}/cloudwatch",
+                        "timezone": "UTC"
+                    },
+                    {
+                        "file_path": "/var/log/hadoop-yarn/*.log",
+                        "log_group_name": "/emr/{JOB_FLOW_ID}/hadoop-yarn",
+                        "multi_line_start_pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2},\\d{3}",
+                        "timezone": "UTC"
+                    },
+                    {
+                        "file_path": "/var/log/hadoop-yarn/**/**/**/stdout",
+                        "log_group_name": "/emr/{JOB_FLOW_ID}/app-stdout",
+                        "multi_line_start_pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}.\\d{3}",
+                        "timezone": "UTC"
+                    },
+                    {
+                        "file_path": "/var/log/hadoop-yarn/**/**/**/stderr",
+                        "log_group_name": "/emr/{JOB_FLOW_ID}/app-stderr",
+                        "multi_line_start_pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}.\\d{3}",
+                        "timezone": "UTC"
+                    },
+                    {
+                        "file_path": "/var/log/hadoop-yarn/**/**/**/syslog",
+                        "log_group_name": "/emr/{JOB_FLOW_ID}/app-syslog",
+                        "multi_line_start_pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}.\\d{3}",
+                        "timezone": "UTC"
+                    },
+                    {
+                        "file_path": "/var/log/hadoop-yarn/**/**/**/controller",
+                        "log_group_name": "/emr/{JOB_FLOW_ID}/app-controller",
+                        "multi_line_start_pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}.\\d{3}",
+                        "timezone": "UTC"
+                    },
+                    {
+                        "file_path": "/var/log/hadoop-hdfs/*.log",
+                        "log_group_name": "/emr/{JOB_FLOW_ID}/hadoop-hdfs",
+                        "multi_line_start_pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2},\\d{3}",
+                        "timezone": "UTC"
+                    }
+                ]
+            }
+        }
+    }
+}
